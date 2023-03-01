@@ -1,44 +1,27 @@
 package com.example.springbootcrudexample.service;
 
+import com.example.springbootcrudexample.DTO.ProductDTO;
 import com.example.springbootcrudexample.entity.Product;
-import com.example.springbootcrudexample.repository.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+//import com.example.springbootcrudexample.entity.Product;
+//import com.example.springbootcrudexample.repository.ProductRepository;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class ProductService {
-    @Autowired
-    private ProductRepository repository;
-//////// POST method////////////
-    public Product saveProduct(Product product){
-      return repository.save(product);
-    }
-    public List<Product> saveProducts(List<Product> products){
-        return repository.saveAll(products);
-    }
-/////// GET method //////////
-    public List<Product> getProducts(){
-        return  repository.findAll();
-    }
-    public Product getProductById(int id){
-        return  repository.findById(id).orElse(null);
-    }
-    public Product getProductByName(String name){
-        return  repository.findByName(name);
-    }
+public interface ProductService{
+    ProductDTO createProduct(ProductDTO productDTO);
 
-    public String deleteProduct(int id){
-        repository.deleteById(id);
-        return "product removed" + id;
-    }
+    List<ProductDTO> getAllProducts();
 
-    public Product updateProduct(Product product){
-        Product existingProduct = repository.findById(product.getId()).orElse(null);
-        existingProduct.setName(product.getName());
-        existingProduct.setQuantity(product.getQuantity());
-        existingProduct.setPrice(product.getPrice());
-        return repository.save(existingProduct);
-    }
+    ProductDTO getProductById(int id);
+
+    ProductDTO getProductByName(String name);
+
+    ProductDTO updateProduct(ProductDTO product);
+
+    String deleteProduct(int id);
+
+//    List<ProductDTO> findAll();
+//    List<ProductDTO> getAllProducts
 }
