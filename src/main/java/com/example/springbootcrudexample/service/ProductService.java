@@ -1,26 +1,21 @@
 package com.example.springbootcrudexample.service;
 
-import com.example.springbootcrudexample.DTO.ProductDTO;
-import com.example.springbootcrudexample.entity.Product;
-//import com.example.springbootcrudexample.entity.Product;
-//import com.example.springbootcrudexample.repository.ProductRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-
 import java.util.List;
 
-public interface ProductService{
-    ProductDTO createProduct(ProductDTO productDTO);
+import com.example.springbootcrudexample.DTO.ProductDTO;
 
-    List<ProductDTO> getAllProducts();
+public interface ProductService {
+	ProductDTO createProduct(ProductDTO productDTO);
 
-    ProductDTO getProductById(int id);
+	List<ProductDTO> getAllProducts();
 
-    ProductDTO getProductByName(String name);
+	ProductDTO getProductById(int id);
 
-    ProductDTO updateProduct(ProductDTO product);
+	ProductDTO getProductByName(String name);
 
-    String deleteProduct(int id);
+	ProductDTO updateProduct(ProductDTO product);
+
+	String deleteProduct(int id);
 
 //    List<ProductDTO> findAll();
 //    List<ProductDTO> getAllProducts

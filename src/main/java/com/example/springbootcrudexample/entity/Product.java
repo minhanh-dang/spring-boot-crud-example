@@ -19,6 +19,7 @@ public class Product {
     @Id
     @GeneratedValue //auto generate the variable below (id)
     private int id;
+    
     private String name;
     private int quantity;
     private double price;
