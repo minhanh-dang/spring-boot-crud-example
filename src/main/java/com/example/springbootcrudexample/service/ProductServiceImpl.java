@@ -25,8 +25,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 //	public List<ProductDTO> createProducts(List<ProductDTO> productsDTO) {
-//		List<Product> products = ProductMapper.getInstance().toEntity(productsDTO);
-//		return ProductMapper.getInstance().toDTO(productRepository.save(products));
+//		List<Product> products = productsDTO.stream().map(p -> ProductMapper.getInstance().toEntity(p))
+//				.collect(Collectors.toList());
+//		List<ProductDTO> productDtoList = products.stream().map(p->ProductMapper.getInstance().toDTO(productRepository.save(p))).collect(Collectors.toList());
+//		//return ProductMapper.getInstance().toDTO(productRepository.save(products));
+//		return productDtoList;
 //	}
 //}
 //    public List<Product> saveProducts(List<Product> products) {
