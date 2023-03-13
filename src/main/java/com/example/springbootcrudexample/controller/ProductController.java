@@ -15,18 +15,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.springbootcrudexample.DTO.ProductDTO;
-import com.example.springbootcrudexample.entity.UserInfo;
+import com.example.springbootcrudexample.model.DTO.ProductDTO;
+import com.example.springbootcrudexample.model.entity.User;
 import com.example.springbootcrudexample.service.JwtService;
 import com.example.springbootcrudexample.service.ProductService;
 
 import lombok.AllArgsConstructor;
 
-
-
-
-// Marks the class as a controller where every method returns a domain object instead of a view
-// It is shorthand for including both @Controller and @ResponseBody
 @RestController
 @AllArgsConstructor
 public class ProductController {
@@ -42,7 +37,7 @@ public class ProductController {
 
     @PostMapping("/addUser")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public String addUser(@RequestBody UserInfo userInfo){
+    public String addUser(@RequestBody User userInfo){
         return service.addUser(userInfo);
     }
     @PostMapping("/addProduct")

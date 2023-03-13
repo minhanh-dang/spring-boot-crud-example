@@ -3,13 +3,13 @@ package com.example.springbootcrudexample.service;
 
 import java.util.List;
 
-import com.example.springbootcrudexample.DTO.ProductDTO;
-import com.example.springbootcrudexample.entity.UserInfo;
+import com.example.springbootcrudexample.model.DTO.ProductDTO;
+import com.example.springbootcrudexample.model.entity.User;
 
 public interface ProductService{
 
 
-    String addUser(UserInfo userInfo);
+    String addUser(User userInfo);
     ProductDTO createProduct(ProductDTO productDTO);
 
     List<ProductDTO> createProducts(List<ProductDTO> productDTOS);

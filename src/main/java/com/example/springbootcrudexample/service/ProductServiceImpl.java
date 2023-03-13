@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.springbootcrudexample.DTO.ProductDTO;
-import com.example.springbootcrudexample.entity.Product;
-import com.example.springbootcrudexample.entity.UserInfo;
-import com.example.springbootcrudexample.mapper.ProductMapper;
+import com.example.springbootcrudexample.model.DTO.ProductDTO;
+import com.example.springbootcrudexample.model.entity.Product;
+import com.example.springbootcrudexample.model.entity.User;
+import com.example.springbootcrudexample.model.mapper.ProductMapper;
 import com.example.springbootcrudexample.repository.ProductRepository;
 import com.example.springbootcrudexample.repository.UserInfoRepository;
 
@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
 
 	//////// POST method////////////
 	@Override
-	public String addUser(UserInfo userInfo) {
+	public String addUser(User userInfo) {
 		userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
 		repository.save(userInfo);
 		return "User added";
