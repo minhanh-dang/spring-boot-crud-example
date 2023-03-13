@@ -1,20 +1,38 @@
+
 package com.example.springbootcrudexample.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.springbootcrudexample.DTO.ProductDTO;
 import com.example.springbootcrudexample.entity.Product;
+import com.example.springbootcrudexample.entity.UserInfo;
 import com.example.springbootcrudexample.mapper.ProductMapper;
 import com.example.springbootcrudexample.repository.ProductRepository;
+import com.example.springbootcrudexample.repository.UserInfoRepository;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductRepository productRepository;
+
+	@Autowired
+	private UserInfoRepository repository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+
+	//////// POST method////////////
+	@Override
+	public String addUser(UserInfo userInfo) {
+		userInfo.setPassword(passwordEncoder.encode(userInfo.getPassword()));
+		repository.save(userInfo);
+		return "User added";
+	}
 
 	//////// POST method////////////
 
@@ -24,17 +42,34 @@ public class ProductServiceImpl implements ProductService {
 		return ProductMapper.getInstance().toDTO(productRepository.save(product));
 	}
 
-//	public List<ProductDTO> createProducts(List<ProductDTO> productsDTO) {
-//		List<Product> products = productsDTO.stream().map(p -> ProductMapper.getInstance().toEntity(p))
-//				.collect(Collectors.toList());
-//		List<ProductDTO> productDtoList = products.stream().map(p->ProductMapper.getInstance().toDTO(productRepository.save(p))).collect(Collectors.toList());
-//		//return ProductMapper.getInstance().toDTO(productRepository.save(products));
-//		return productDtoList;
+//    public List<ProductDTO> createProducts(List<ProductDTO> productsDTO){
+//        List<Product> products = ProductMapper.getInstance().toEntity(productsDTO);
+//        return ProductMapper.getInstance().toDTO(productRepository.save(products));
+
+	// public List<ProductDTO> createProducts(List<ProductDTO> productsDTO) {
+//		List<Product> products = ProductMapper.getInstance().toEntity(productsDTO);
+//		return ProductMapper.getInstance().toDTO(productRepository.save(products));
 //	}
 //}
 //    public List<Product> saveProducts(List<Product> products) {
 //        return productRepository.saveAll(products);
 //    }
+//}
+	@Override
+	public List<ProductDTO> createProducts(List<ProductDTO> productDTOS) {
+		List<Product> products = productDTOS.stream().map(product -> ProductMapper.getInstance().toEntity(product))
+				.collect(Collectors.toList());
+		List<ProductDTO> productDTOList = products.stream()
+				.map(product -> ProductMapper.getInstance().toDTO(productRepository.save(product)))
+				.collect(Collectors.toList());
+		return productDTOList;
+//        List<Product> products = ProductMapper.getInstance().toEntity(productsDTO); ;
+//        return productRepository.saveAll(products).stream()
+//                .map(product -> ProductMapper.getInstance().toDTO(products))
+//                .collect(Collectors.toList());
+		// return
+		// ProductMapper.getInstance().toDTO(productRepository.saveAll(productDTOS));
+	}
 
 	/////// GET method //////////
 
